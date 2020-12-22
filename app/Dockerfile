@@ -10,9 +10,10 @@ RUN python3 -m venv venv
 
 COPY requirements.txt .
 
-RUN . venv/bin/activate && \
-    venv/bin/python3 -m pip install --upgrade pip && \
-    pip install Django && \
-    pip install -r requirements.txt
+RUN apt-get update -y && apt-get upgrade -y \
+    && apt-get install gcc python3-dev musl-dev gunicorn -y \
+    && python3 -m pip install --upgrade pip \
+    && venv/bin/python3 -m pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 COPY . .
