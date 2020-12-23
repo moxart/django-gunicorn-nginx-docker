@@ -1,0 +1,26 @@
+FROM python:3.9-buster
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH ./venv/lib/python3.8/site-packages
+
+RUN mkdir -p /home/app
+
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/static
+
+WORKDIR $APP_HOME
+
+RUN python3 -m venv venv
+
+COPY requirements.txt .
+
+RUN apt-get update -y && apt-get upgrade -y \
+    && apt-get install gcc python3-dev musl-dev gunicorn -y \
+    && python3 -m pip install --upgrade pip \
+    && venv/bin/python3 -m pip install --upgrade pip \
+    && pip install -r requirements.txt
+
+COPY . .
