@@ -6,6 +6,8 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
+    volumes:
+      - static:/home/app/web/static
     command: bash -c "gunicorn mysite.wsgi:application --bind 0.0.0.0:8000"
     expose:
       - 8000
@@ -25,9 +27,9 @@ services:
     container_name: django_nginx
     build: ./nginx
     volumes:
-      - static:/home/app/web/static
+      - static:/static
     ports:
-      - 80:80
+      - 1337:80
     depends_on:
       - web
 
