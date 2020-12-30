@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   web:
-    container_name: django_web
+    container_name: django_web_dev
     build: ./app
     restart: on-failure
     volumes:
@@ -15,7 +15,7 @@ services:
       - db
 
   db:
-    container_name: django_db
+    container_name: django_postgres_dev
     image: postgres
     volumes:
       - db_data:/var/lib/postgresql/data/

@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   web:
+    container_name: django_web_prod
     build:
       context: ./app
       dockerfile: Dockerfile.prod
@@ -19,6 +20,7 @@ services:
       - my-network
 
   db:
+    container_name: django_postgres_prod
     image: postgres
     volumes:
       - db_data:/var/lib/postgresql/data/
@@ -28,6 +30,7 @@ services:
       - my-network
 
   nginx:
+    container_name: django_nginx_prod
     build:
       context: ./nginx
       dockerfile: Dockerfile
