@@ -30,7 +30,7 @@ RUN apk add --virtual .build-deps \
     && apk add --virtual .rundeps $runDeps \
     && apk del .build-deps
 
-COPY . $HOME_APP/
+ADD . $HOME_APP/
 
 RUN chmod -x ./scripts/*
 RUN chown -R app:app $HOME_APP
