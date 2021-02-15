@@ -40,4 +40,4 @@ RUN chmod -R 755 $HOME_APP
 
 USER app
 
-ENTRYPOINT ["./scripts/entrypoint.sh"]
+ENTRYPOINT ["./scripts/docker-entrypoint.sh"]

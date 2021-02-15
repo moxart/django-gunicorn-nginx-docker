@@ -5,11 +5,9 @@ ENV PYTHONUNBUFFERED 1
 
 RUN addgroup -S app && adduser -S app -G app
 
-ENV HOME /home/app
-ENV HOME_APP /home/app/
-ENV STATIC /home/app/static/
-
-RUN mkdir $STATIC
+ENV HOME_APP /home/app
+RUN mkdir $HOME_APP/static/
+RUN mkdir $HOME_APP/media/
 
 WORKDIR $HOME_APP
 
@@ -39,6 +37,6 @@ RUN chmod -x ./scripts/*
 RUN chown -R app:app $HOME_APP
 RUN chmod -R 755 $HOME_APP
 
-USER app
+USER root
 
-ENTRYPOINT ["./scripts/entrypoint-prod.sh"]
+ENTRYPOINT ["./scripts/docker-entrypoint-prod.sh"]
